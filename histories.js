@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text } from 'react-native';
 // import { storeHistories } from './services/histories_service';
 import { getHistories } from './services/histories_service';
+import { Searchbar } from 'react-native-paper';
 
 
-const Item = ({ title , navigation }) => (
+
+const Item = ({ title, navigation }) => (
     <View style={styles.item} >
         <Text
-            onPress={ async() => {
+            onPress={async () => {
                 let arr = title.split(" ");
-                navigation.navigate('Computer',{
+                navigation.navigate('Computer', {
                     value: arr[arr.length - 1]
                 });
-                
+
             }
             }
             style={styles.value}
@@ -27,10 +29,20 @@ const Histories = ({ navigation }) => {
         <Item title={item} navigation={navigation} />
     );
     const [history, setHistory] = useState([]);
+    const [searchQuery, setSearchQuery] = React.useState('');
+
+    const onChangeSearch = query => {
+        let filteredName = history.filter((item) => {
+            return item.toLowerCase().match(query)
+        })
+        console.log(filteredName)
+        setSearchQuery(filteredName)
+    };
     useEffect(() => {
         async function fetchData() {
             let tmp = await getHistories('@storage_Key');
             setHistory(tmp);
+            setSearchQuery([...history]);
         }
         const unsubscribe = navigation.addListener('focus', (e) => {
             fetchData();
@@ -42,9 +54,16 @@ const Histories = ({ navigation }) => {
     );
 
     return (
+
         <SafeAreaView style={styles.container}>
+            <Searchbar
+                placeholder="Search"
+                onChangeText={onChangeSearch}
+                value={searchQuery}
+                style={styles.searchbar}
+            />
             <FlatList
-                data={history}
+                data={searchQuery}
                 renderItem={renderItem}
             />
         </SafeAreaView>
@@ -67,6 +86,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
 
+    },
+    searchbar: {
+        borderRadius: 20,
     },
     value: {
         color: "#000",
