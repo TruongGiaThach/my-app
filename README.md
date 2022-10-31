@@ -3,20 +3,22 @@ Repo cũ: https://github.com/TruongGiaThach/AwesomeProject
 
 Hướng dẫn cài đặt:
 - Cài đặt môi trường (trên ubuntu): nodejs 16
-> curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+> 
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
-> nvm install node 16
+    nvm install node 16
 
-> npm version
+    npm version
 - Clone project 
 
 >  git clone https://github.com/TruongGiaThach/my-app.git
 
 - Vào project và cài các package
 
-> cd  my-app
+> 
+    cd  my-app
 
-> npm install
+    npm install
 
 - Chạy ứng dụng trên web
 
