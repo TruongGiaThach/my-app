@@ -1,4 +1,4 @@
-# my-app
+# Calculator
 Repo cũ: https://github.com/TruongGiaThach/AwesomeProject
 
 Hướng dẫn cài đặt:
